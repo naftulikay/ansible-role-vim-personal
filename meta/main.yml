@@ -12,7 +12,7 @@ galaxy_info:
     - name: EL
       versions: [7]
     - name: Ubuntu
-      versions: [loki, xenial]
+      versions: [xenial]
 
   galaxy_tags: [vim,neovim]
 
