@@ -15,7 +15,6 @@ env:
   matrix: # each entry is its own run
     - IMAGE_NAME: naftulikay/centos-vm:7
     - IMAGE_NAME: naftulikay/xenial-vm:latest
-    - IMAGE_NAME: naftulikay/trusty-vm:latest
     - IMAGE_NAME: naftulikay/loki-vm:latest
 
 script: make test-clean

@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  name: vim-personal
+  author: Naftuli Kay
+  description: Installs and configures my own personal Vim setup.
+
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: EL
+      versions: [7]
+    - name: Ubuntu
+      versions: [xenial]
+    - name: elementary OS
+      versions: [loki]
+
+  galaxy_tags: [vim,neovim]
+
+dependencies:
+  - role: naftulikay.base
