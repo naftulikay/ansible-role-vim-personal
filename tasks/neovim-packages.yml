@@ -1,0 +1,33 @@
+---
+- name: create plugins directories
+  file:
+    state: directory
+    recurse: true
+    path: "/home/{{ vim_user }}/{{ item }}"
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0700
+  with_items:
+    - .local/share/nvim/site/autoload
+    - .local/share/nvim/plugged
+
+- name: ensure git installed
+  package: name=git state=present
+  become: true
+
+- name: install url plugins
+  get_url:
+    url: "{{ item.url }}"
+    checksum: "{{ item.checksum | default('') }}"
+    dest: "/home/{{ vim_user }}/.local/share/nvim/site/autoload/{{ item.name }}.vim"
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0600
+  with_items: "{{ neovim_url_plugins }}"
+  register: url_plugins
+
+- name: install plugs
+  command: vim "+PlugInstall" "+q" "+q"
+  become: true
+  become_user: "{{ vim_user }}"
+  when: (url_plugins is changed) or (nvim_config is changed)

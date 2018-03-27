@@ -29,7 +29,7 @@
 
 - name: refresh apt cache
   apt: update_cache=yes cache_valid_time=3600
-  when: is_ubuntu_derivative or (ubuntu_repository|changed)
+  when: is_ubuntu_derivative or (ubuntu_repository is changed)
   become: true
 
 - name: install rhel neovim repository
@@ -43,9 +43,6 @@
     gpgkey: https://copr-be.cloud.fedoraproject.org/results/dperson/neovim/pubkey.gpg
     repo_gpgcheck: true
     skip_if_unavailable: true
-    params:
-      type: rpm-md
-      enabled_metadata: 1
   when: is_redhat_derivative
   become: true
 
@@ -71,3 +68,4 @@
     owner: "{{ vim_user }}"
     group: "{{ vim_user }}"
     mode: 0600
+  register: nvim_config

@@ -10,7 +10,7 @@
 - name: build
   hosts: localhost
   roles:
-    - role: vim-personal
+    - role: default
       vim_user: vagrant
 
 - name: test

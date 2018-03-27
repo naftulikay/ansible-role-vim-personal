@@ -1,0 +1,17 @@
+---
+vim_plugs:
+#   FIXME ale conflicts with neomake
+# - name: neomake/neomake
+  - name: scrooloose/nerdtree
+  - name: scrooloose/nerdtree-git-plugin
+  - name: Shougo/deoplete.nvim
+    extra: "{ 'do': ':UpdateRemotePlugins' }"
+  - name: w0rp/ale
+
+neovim_url_plugins:
+  - name: gnupg
+    url: https://raw.githubusercontent.com/naftulikay/vim-gnupg/master/plugin/gnupg.vim
+    checksum: "sha256:524dd878f78dabda4a8e667553607f4fb8fd3f223f4c6be40eeaece85c9b7fc0"
+
+  - name: plug
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

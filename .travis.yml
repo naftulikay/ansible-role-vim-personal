@@ -9,15 +9,12 @@ services:
   - docker
 
 env:
-  global: # applied to every run
-    ROLE_NAME: vim-personal
-
   matrix: # each entry is its own run
-    - IMAGE_NAME: naftulikay/centos-vm:7
-    - IMAGE_NAME: naftulikay/xenial-vm:latest
-    - IMAGE_NAME: naftulikay/loki-vm:latest
+    - IMAGE: centos7
+    - IMAGE: xenial
+    - IMAGE: loki
 
-script: make test-clean
+script: make clean test
 
 notifications:
   email:
