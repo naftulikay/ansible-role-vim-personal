@@ -1,2 +1,18 @@
 ---
-file: {}
+file:
+  '/usr/bin/vim':
+    exists: true
+    filetype: symlink
+    linked-to: /etc/alternatives/vim
+  '/etc/alternatives/vim':
+    exists: true
+    filetype: symlink
+    linked-to: /usr/bin/nvim
+  '/usr/bin/editor':
+    exists: true
+    filetype: symlink
+    linked-to: /etc/alternatives/editor
+  '/etc/alternatives/editor':
+    exists: true
+    filetype: symlink
+    linked-to: /usr/bin/nvim

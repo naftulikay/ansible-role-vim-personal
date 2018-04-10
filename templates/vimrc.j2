@@ -1,0 +1,31 @@
+" --- jenegunn/vim-plug ---
+call plug#begin('~/.local/share/nvim/plugged')
+
+{% for plug in vim_plugs %}
+Plug '{{ plug.name }}'{% if plug.get('extra', None) %}, {{ plug.extra }}{% endif %}
+
+{% endfor %}
+
+call plug#end()
+
+" -- neomake/neomake ---
+" function ImOnBattery()
+"   return readfile('/sys/class/power_supply/BAT0/status') == ['0']
+" endfunction
+"
+" if ImOnBattery()
+"   call neomake#configure#automake('w')
+" else
+"   call neomake#configure#automake('nw', 1000)
+" endif
+
+" --- Shougo/deoplete.nvim ---
+let g:deoplete#enable_at_startup = 1
+
+" --- w0rp/ale ---
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
