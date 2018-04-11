@@ -18,3 +18,9 @@ test: start
 	@docker exec $(IMAGE) ansible-galaxy install -r /etc/ansible/roles/default/tests/requirements.yml
 	@docker exec $(IMAGE) env ANSIBLE_FORCE_COLOR=yes \
 		ansible-playbook /etc/ansible/roles/default/tests/playbook.yml
+
+apply:
+	@mkdir -p target/
+	@rsync --exclude=.ansible/galaxy-roles -a ./ .ansible/galaxy-roles/vim-personal/
+	@ansible-galaxy install -p .ansible/galaxy-roles -r requirements.yml
+	@ansible-playbook -i localhost, --ask-become-pass local.yml

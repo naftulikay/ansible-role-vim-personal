@@ -1,4 +1,37 @@
-" --- jenegunn/vim-plug ---
+" --- personal settings ---
+" set leader key to space
+let mapleader="\<SPACE>"
+
+" show matching brackets
+set showmatch
+
+" set tab options
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+" Tell Vim which characters to show for expanded TABs,
+" trailing whitespace, and end-of-lines. VERY useful!
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+set list                " Show problematic characters.
+
+" Also highlight all tabs and trailing whitespace characters.
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+match ExtraWhitespace /\s\+$\|\t/
+
+" allow different rules for different file types
+filetype plugin on
+
+" ------- Plugs -------
+" --- junegunn/fzf ---
+set rtp+=/usr/local/bin/fzf
+
+nmap <leader>f :GFiles<CR>
+nmap <leader>b :Buffers<CR>
+
+" --- junegunn/vim-plug ---
 call plug#begin('~/.local/share/nvim/plugged')
 
 {% for plug in vim_plugs %}
@@ -8,16 +41,11 @@ Plug '{{ plug.name }}'{% if plug.get('extra', None) %}, {{ plug.extra }}{% endif
 
 call plug#end()
 
-" -- neomake/neomake ---
-" function ImOnBattery()
-"   return readfile('/sys/class/power_supply/BAT0/status') == ['0']
-" endfunction
-"
-" if ImOnBattery()
-"   call neomake#configure#automake('w')
-" else
-"   call neomake#configure#automake('nw', 1000)
-" endif
+" --- scrooloose/nerdcommenter ---
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 " --- Shougo/deoplete.nvim ---
 let g:deoplete#enable_at_startup = 1

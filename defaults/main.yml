@@ -1,7 +1,12 @@
 ---
+fzf_github_repo_url: https://github.com/junegunn/fzf-bin
+fzf_version_matcher: ^https://github\.com/junegunn/fzf-bin/releases/tag/(?P<release>\d+\.\d+\.\d+)$
+fzf_version_replace: \g<release>
+
 vim_plugs:
-#   FIXME ale conflicts with neomake
-# - name: neomake/neomake
+  - name: junegunn/fzf
+  - name: junegunn/fzf.vim
+  - name: scrooloose/nerdcommenter
   - name: scrooloose/nerdtree
   - name: scrooloose/nerdtree-git-plugin
   - name: Shougo/deoplete.nvim
