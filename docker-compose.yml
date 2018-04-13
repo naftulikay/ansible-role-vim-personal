@@ -18,7 +18,7 @@ services:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ./:/etc/ansible/roles/default:ro
-      - ./ansible.cfg:/etc/ansible/ansible.cfg:ro
+      - ./tests/ansible.cfg:/etc/ansible/ansible.cfg:ro
     stop_grace_period: 1s
 
   loki:
@@ -32,7 +32,7 @@ services:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ./:/etc/ansible/roles/default:ro
-      - ./ansible.cfg:/etc/ansible/ansible.cfg:ro
+      - ./tests/ansible.cfg:/etc/ansible/ansible.cfg:ro
     stop_grace_period: 1s
 
   xenial:
@@ -46,5 +46,5 @@ services:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ./:/etc/ansible/roles/default:ro
-      - ./ansible.cfg:/etc/ansible/ansible.cfg:ro
+      - ./tests/ansible.cfg:/etc/ansible/ansible.cfg:ro
     stop_grace_period: 1s

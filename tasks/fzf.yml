@@ -1,0 +1,59 @@
+---
+- name: detect fzf latest version
+  uri:
+    url: "{{ fzf_github_repo_url }}/releases/latest"
+    status_code: 302
+    follow_redirects: false
+  register: fzf_latest_version
+  changed_when: false
+
+- name: establish fzf version
+  set_fact:
+    fzf_version: "{{ fzf_latest_version.location | regex_replace(fzf_version_matcher, fzf_version_replace) }}"
+    fzf_architecture: |-
+      {%- if ansible_architecture == "x86_64" -%}
+        amd64
+      {%- else -%}
+        386
+      {%- endif -%}
+
+- name: establish fzf download facts
+  set_fact:
+    fzf_download_url: "{{ fzf_github_repo_url }}/releases/download/{{ fzf_version }}/fzf-{{ fzf_version }}-{{ ansible_system | lower }}_{{ fzf_architecture }}.tgz"
+
+    fzf_download_path: /usr/local/share/fzf/{{ fzf_version }}
+    fzf_bin: "/usr/local/share/fzf/{{ fzf_version }}/fzf"
+
+- name: create fzf vendor directory
+  file:
+    path: "{{ fzf_download_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: install fzf
+  unarchive:
+    src: "{{ fzf_download_url }}"
+    dest: "{{ fzf_download_path }}"
+    creates: "{{ fzf_bin }}"
+    remote_src: true
+  become: true
+
+- name: modify fzf permissions
+  file:
+    path: "{{ fzf_bin }}"
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: link fzf
+  file:
+    src: "{{ fzf_bin }}"
+    dest: /usr/local/bin/fzf
+    state: link
+    owner: root
+    group: root
+  become: true

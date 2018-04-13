@@ -11,6 +11,9 @@
     - name: be an adult
       selinux: state=enforcing policy=targeted
 
+    - name: install rsync
+      package: name=rsync state=present
+
     - name: create ansible directories
       file: path={{ item }} state=directory owner=root group=root mode=0755
       with_items:

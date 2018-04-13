@@ -1,4 +1,7 @@
 ---
+- name: install fzf
+  include_tasks: fzf.yml
+
 - name: install neovim
   include_tasks: neovim.yml
 
