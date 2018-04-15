@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+.DEFAULT_GOAL := apply
+.PHONY: apply
+
 DEFAULT_IMAGE:=loki
 IMAGE:=$(shell echo "$${IMAGE:-$(DEFAULT_IMAGE)}")
 
@@ -20,7 +23,7 @@ test: start
 		ansible-playbook /etc/ansible/roles/default/tests/playbook.yml
 
 apply:
-	@mkdir -p target/
+	@mkdir -p target/ .ansible/galaxy-roles
 	@rsync --exclude=.ansible/galaxy-roles -a ./ .ansible/galaxy-roles/vim-personal/
 	@ansible-galaxy install -p .ansible/galaxy-roles -r requirements.yml
 	@ansible-playbook -i localhost, --ask-become-pass local.yml
