@@ -10,12 +10,20 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 
+" disable swap files and backups, welcome to the future where git is a thing
+set nobackup
+set noswapfile
+
+" setup default window split options
+set splitbelow
+set splitright
+
 " Tell Vim which characters to show for expanded TABs,
 " trailing whitespace, and end-of-lines. VERY useful!
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
-set list                " Show problematic characters.
+set list " Show problematic characters.
 
 " Also highlight all tabs and trailing whitespace characters.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -24,11 +32,21 @@ match ExtraWhitespace /\s\+$\|\t/
 " allow different rules for different file types
 filetype plugin on
 
+" search settings
+set ignorecase
+set smartcase
+set gdefault
+
+" set terminal keystrokes
+tnoremap <Esc> <C-\><C-n>
+
 " ------- Plugs -------
 " --- junegunn/fzf ---
 set rtp+=/usr/local/bin/fzf
 
-nmap <leader>f :GFiles<CR>
+nmap <leader>o :GFiles<CR>
+nmap <leader>r :GFiles<CR>
+nmap <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 
 " --- junegunn/vim-plug ---
@@ -46,6 +64,8 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+nmap <leader>t :NERDTreeToggle<CR>
 
 " --- Shougo/deoplete.nvim ---
 let g:deoplete#enable_at_startup = 1
