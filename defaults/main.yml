@@ -4,6 +4,8 @@ fzf_version_matcher: ^https://github\.com/junegunn/fzf-bin/releases/tag/(?P<rele
 fzf_version_replace: \g<release>
 
 vim_plugs:
+  - name: autozimu/LanguageClient-neovim
+    extra: "{ 'branch': 'next', 'do': 'bash install.sh' }"
   - name: junegunn/fzf
   - name: junegunn/fzf.vim
   - name: naftulikay/vim-gnupg

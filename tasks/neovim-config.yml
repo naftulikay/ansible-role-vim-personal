@@ -1,0 +1,23 @@
+---
+- name: create nvim config dir
+  file: path=/home/{{ vim_user }}/.config/nvim state=directory owner={{ vim_user }} group={{ vim_user }} mode=0700
+
+- name: install nvim config file
+  template:
+    src: "{{ item.src }}"
+    dest: "/home/{{ vim_user }}/.config/nvim/{{ item.dest }}"
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0600
+  register: nvim_config
+  with_items:
+    - { src: init.vim.j2, dest: init.vim }
+
+- name: ensure rsync installed
+  package: name=rsync state=present
+  become: true
+
+- name: install additional nvim config files
+  synchronize:
+    src: config/
+    dest: "/home/{{ vim_user }}/.config/nvim/"

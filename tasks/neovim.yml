@@ -58,14 +58,3 @@
     - { name: vim, link: /usr/bin/vim }
     - { name: editor, link: /usr/bin/editor }
 
-- name: create nvim config dir
-  file: path=/home/{{ vim_user }}/.config/nvim state=directory owner={{ vim_user }} group={{ vim_user }} mode=0700
-
-- name: install nvim config
-  template:
-    src: vimrc.j2
-    dest: "/home/{{ vim_user }}/.config/nvim/init.vim"
-    owner: "{{ vim_user }}"
-    group: "{{ vim_user }}"
-    mode: 0600
-  register: nvim_config

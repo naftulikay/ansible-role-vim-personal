@@ -5,6 +5,9 @@
 - name: install neovim
   include_tasks: neovim.yml
 
+- name: install neovim config
+  include_tasks: neovim-config.yml
+
 - name: install neovim python
   include_tasks: neovim-python.yml
 
