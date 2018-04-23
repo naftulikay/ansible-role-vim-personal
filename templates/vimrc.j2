@@ -59,6 +59,14 @@ Plug '{{ plug.name }}'{% if plug.get('extra', None) %}, {{ plug.extra }}{% endif
 
 call plug#end()
 
+" --- nafutlikay/vim-gnupg ---
+let g:GPGExecutable="/usr/bin/gpg2"
+let g:GPGUseAgent=1
+let g:GPGPreferArmor=1
+let g:GPGPreferSign=1
+let g:GPGUsePipes=1
+let g:GPGDefaultRecipients="6D63865D1C6EEB0F92C394A15D21FFA27D8DCC66"
+
 " --- scrooloose/nerdcommenter ---
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1

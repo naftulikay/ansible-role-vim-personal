@@ -6,6 +6,7 @@ fzf_version_replace: \g<release>
 vim_plugs:
   - name: junegunn/fzf
   - name: junegunn/fzf.vim
+  - name: naftulikay/vim-gnupg
   - name: scrooloose/nerdcommenter
   - name: scrooloose/nerdtree
   - name: scrooloose/nerdtree-git-plugin
@@ -14,9 +15,5 @@ vim_plugs:
   - name: w0rp/ale
 
 neovim_url_plugins:
-  - name: gnupg
-    url: https://raw.githubusercontent.com/naftulikay/vim-gnupg/master/plugin/gnupg.vim
-    checksum: "sha256:524dd878f78dabda4a8e667553607f4fb8fd3f223f4c6be40eeaece85c9b7fc0"
-
   - name: plug
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
