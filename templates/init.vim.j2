@@ -41,6 +41,14 @@ set gdefault
 tnoremap <Esc> <C-\><C-n>
 
 " ------- Plugs -------
+" --- autozimu/LanguageClient-neovim ---
+set hidden
+let g:LanguageClient_serverCommands = { 'rust': ['rustup', 'run', 'stable', 'rls'] }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
 " --- junegunn/fzf ---
 set rtp+=/usr/local/bin/fzf
 
@@ -77,6 +85,7 @@ nmap <leader>t :NERDTreeToggle<CR>
 
 " --- Shougo/deoplete.nvim ---
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 
 " --- w0rp/ale ---
 " Load all plugins now.
@@ -85,3 +94,6 @@ packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
+
+let g:ale_rust_rls_toolchain = "stable"
+let g:ale_linters = {'rust': ['rls']}
