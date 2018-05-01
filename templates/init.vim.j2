@@ -5,11 +5,11 @@
 source $HOME/.config/nvim/plugs.nvim
 
 " load local configuration first
-{% for config in config_files %}
+{% for config in config_files | sort %}
 source $HOME/.config/nvim/config/{{ config }}
 {% endfor %}
 
 " load per-plug configuration last
-{% for plug_config in plug_config_files %}
+{% for plug_config in plug_config_files | sort %}
 source $HOME/.config/nvim/config/plugs/{{ plug_config }}
 {% endfor %}
