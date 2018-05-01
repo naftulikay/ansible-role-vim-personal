@@ -1,0 +1,6 @@
+" splits configuration
+" -----------------------------------------------------------------------------
+
+" setup default window split options
+set splitbelow
+set splitright

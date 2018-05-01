@@ -1,0 +1,6 @@
+" swap configuration
+" -----------------------------------------------------------------------------
+
+" disable swap files and backups, welcome to the future where git is a thing
+set nobackup
+set noswapfile

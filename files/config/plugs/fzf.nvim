@@ -1,0 +1,9 @@
+" plug: junegunn/fzf
+" -----------------------------------------------------------------------------
+
+set rtp+=/usr/local/bin/fzf
+
+nmap <leader>o :GFiles<CR>
+nmap <leader>r :GFiles<CR>
+nmap <leader>f :Files<CR>
+nmap <leader>b :Buffers<CR>

@@ -1,106 +1,15 @@
-" --- personal settings ---
-" set leader key to space
-let mapleader="\<SPACE>"
+" naftuli's personal vim configuration
+" -----------------------------------------------------------------------------
 
-" show matching brackets
-set showmatch
-
-" set tab options
-set expandtab
-set tabstop=2
-set shiftwidth=2
-
-" disable swap files and backups, welcome to the future where git is a thing
-set nobackup
-set noswapfile
-
-" setup default window split options
-set splitbelow
-set splitright
-
-" Tell Vim which characters to show for expanded TABs,
-" trailing whitespace, and end-of-lines. VERY useful!
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
-set list " Show problematic characters.
-
-" Also highlight all tabs and trailing whitespace characters.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$\|\t/
-
-" allow different rules for different file types
-filetype plugin on
-
-" search settings
-set ignorecase
-set smartcase
-set gdefault
-
-" set terminal keystrokes
-tnoremap <Esc> <C-\><C-n>
-
-" ------- Plugs -------
-" --- autozimu/LanguageClient-neovim ---
-set hidden
-let g:LanguageClient_serverCommands = { 'rust': ['rustup', 'run', 'stable', 'rls'] }
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-" --- junegunn/fzf ---
-set rtp+=/usr/local/bin/fzf
-
-nmap <leader>o :GFiles<CR>
-nmap <leader>r :GFiles<CR>
-nmap <leader>f :Files<CR>
-nmap <leader>b :Buffers<CR>
-
-" --- junegunn/vim-plug ---
-call plug#begin('~/.local/share/nvim/plugged')
-
-{% for plug in vim_plugs %}
-Plug '{{ plug.name }}'{% if plug.get('extra', None) %}, {{ plug.extra }}{% endif %}
-
+" load local configuration
+{% for config in config_files %}
+source $HOME/.config/nvim/config/{{ config }}
 {% endfor %}
 
-call plug#end()
+" load plugs
+source $HOME/.config/nvim/plugs.nvim
 
-" --- nafutlikay/vim-gnupg ---
-let g:GPGExecutable="/usr/bin/gpg2"
-let g:GPGUseAgent=1
-let g:GPGPreferArmor=1
-let g:GPGPreferSign=1
-let g:GPGUsePipes=1
-let g:GPGDefaultRecipients="6D63865D1C6EEB0F92C394A15D21FFA27D8DCC66"
-
-" --- scrooloose/nerdcommenter ---
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-
-nmap <leader>t :NERDTreeToggle<CR>
-
-" --- Shougo/deoplete.nvim ---
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-
-" --- vim-airline/vim-airline ---
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" --- vim-airline/vim-airline-themes
-let g:airline_theme = 'powerlineish'
-
-" --- w0rp/ale ---
-" Load all plugins now.
-" Plugins need to be added to runtimepath before helptags can be generated.
-packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
-silent! helptags ALL
-
-let g:ale_rust_rls_toolchain = "stable"
-let g:ale_linters = {'rust': ['rls']}
+" load plug configuration
+{% for plug in plug_config_files %}
+source $HOME/.config/nvim/config/plugs/{{ plug }}
+{% endfor %}

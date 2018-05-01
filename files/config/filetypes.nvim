@@ -1,0 +1,9 @@
+" filetypes configuration
+" -----------------------------------------------------------------------------
+
+filetype plugin on
+filetype indent plugin on
+
+au! BufNewFile,BufRead,BufWrite *.nvim setfiletype vim
+au! BufNewFile,BufRead,BufWrite *.nvim.j2 setfiletype vim
+au! BufNewFile,BufRead,BufWrite *.vim.j2 setfiletype vim
