@@ -1,6 +1,10 @@
 ---
 - name: create nvim config dir
-  file: path=/home/{{ vim_user }}/.config/nvim state=directory owner={{ vim_user }} group={{ vim_user }} mode=0700
+  file: path=/home/{{ vim_user }}/.config/{{ item }} state=directory owner={{ vim_user }} group={{ vim_user }} mode=0700
+  with_items:
+    - nvim
+    - nvim/config
+    - nvim/config/plugs
 
 - name: ensure rsync installed
   package: name=rsync state=present
@@ -8,8 +12,9 @@
 
 - name: install additional nvim config files
   synchronize:
-    src: config/
-    dest: "/home/{{ vim_user }}/.config/nvim/config/"
+    src: config
+    dest: "/home/{{ vim_user }}/.config/nvim/config"
+    recursive: true
     delete: true
 
 - name: find config files
