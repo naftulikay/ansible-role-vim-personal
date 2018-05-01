@@ -1,15 +1,15 @@
 " naftuli's personal vim configuration
 " -----------------------------------------------------------------------------
 
-" load local configuration
+" load plugs
+source $HOME/.config/nvim/plugs.nvim
+
+" load local configuration first
 {% for config in config_files %}
 source $HOME/.config/nvim/config/{{ config }}
 {% endfor %}
 
-" load plugs
-source $HOME/.config/nvim/plugs.nvim
-
-" load plug configuration
-{% for plug in plug_config_files %}
-source $HOME/.config/nvim/config/plugs/{{ plug }}
+" load per-plug configuration last
+{% for plug_config in plug_config_files %}
+source $HOME/.config/nvim/config/plugs/{{ plug_config }}
 {% endfor %}

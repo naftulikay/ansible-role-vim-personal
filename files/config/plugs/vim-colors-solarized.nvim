@@ -1,0 +1,9 @@
+" theme configuration
+" -----------------------------------------------------------------------------
+
+let g:solarized_termcolors=256
+
+" guides recommend having the following line here, but it may be that neovim defaults this to on
+" syntax enable
+set background=dark
+colorscheme solarized

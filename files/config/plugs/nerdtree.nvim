@@ -1,0 +1,5 @@
+" plug: scrooloose/nerdcommenter
+" -----------------------------------------------------------------------------
+
+" remap <leader>t to toggle visibility of nerdtree
+nmap <leader>t :NERDTreeToggle<CR>

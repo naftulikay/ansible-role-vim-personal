@@ -4,6 +4,7 @@ fzf_version_matcher: ^https://github\.com/junegunn/fzf-bin/releases/tag/(?P<rele
 fzf_version_replace: \g<release>
 
 vim_plugs:
+  - name: altercation/vim-colors-solarized
   - name: autozimu/LanguageClient-neovim
     extra: "{ 'branch': 'next', 'do': 'bash install.sh' }"
     config: language-client
