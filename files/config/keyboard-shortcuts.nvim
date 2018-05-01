@@ -1,0 +1,8 @@
+" keyboard shortcuts
+" -----------------------------------------------------------------------------
+
+" set leader key to space
+let mapleader="\<SPACE>"
+
+" set terminal keystrokes
+tnoremap <Esc> <C-\><C-n>

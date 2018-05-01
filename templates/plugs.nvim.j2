@@ -1,0 +1,11 @@
+" inclusion of plugs via vim-plug
+" -----------------------------------------------------------------------------
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+{% for plug in vim_plugs %}
+Plug '{{ plug.name }}'{% if plug.get('extra', None) %}, {{ plug.extra }}{% endif %}
+
+{% endfor %}
+
+call plug#end()
