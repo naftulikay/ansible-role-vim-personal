@@ -7,33 +7,19 @@ vim_plugs:
   - name: altercation/vim-colors-solarized
   - name: autozimu/LanguageClient-neovim
     extra: "{ 'branch': 'next', 'do': 'bash install.sh' }"
-    config: language-client
-
+  - name: hashivim/vim-terraform
+  - name: juliosueiras/vim-terraform-completion
   - name: junegunn/fzf
-    config: fzf
-
   - name: junegunn/fzf.vim
   - name: naftulikay/vim-gnupg
-    config: vim-gnupg
-
   - name: scrooloose/nerdcommenter
-    config: nerdcommenter
-
   - name: scrooloose/nerdtree
   - name: scrooloose/nerdtree-git-plugin
-
   - name: Shougo/deoplete.nvim
-    config: deoplete
-
     extra: "{ 'do': ':UpdateRemotePlugins' }"
   - name: vim-airline/vim-airline
-    config: vim-airline
-
   - name: vim-airline/vim-airline-themes
-    config: vim-airline-themes
-
   - name: w0rp/ale
-    config: ale
 
 neovim_url_plugins:
   - name: plug
