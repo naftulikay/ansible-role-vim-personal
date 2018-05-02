@@ -17,6 +17,7 @@ vim_plugs:
   - name: scrooloose/nerdtree-git-plugin
   - name: Shougo/deoplete.nvim
     extra: "{ 'do': ':UpdateRemotePlugins' }"
+  - name: tpope/vim-eunuch
   - name: vim-airline/vim-airline
   - name: vim-airline/vim-airline-themes
   - name: w0rp/ale
