@@ -3,11 +3,19 @@
 
 " Tell Vim which characters to show for expanded TABs,
 " trailing whitespace, and end-of-lines. VERY useful!
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
+
+" list characters definitions
+"   eol: end of line character
+"   tab: two characters can be used to show a tab
+"   trail: character to show for trailing spaces
+"   extends: character to show in the last column when the line continues beyond the right of the screen
+"   precedes: character to show in the first column when the line continues beyond the left of the screen
+"   conceal: character to show in place of concealed text
+"   nbsp: character to show for a non breaking space
+"   space: an actual space
+set listchars=eol:↵,nbsp:◦,tab:―→,trail:⮿,extends:⮚,precedes:⮘
 set list " Show problematic characters.
 
 " Also highlight all tabs and trailing whitespace characters.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$\|\t/
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
