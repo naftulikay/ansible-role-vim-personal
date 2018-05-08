@@ -3,3 +3,6 @@
 
 " show matching brackets
 set showmatch
+
+" display numbers
+set number
