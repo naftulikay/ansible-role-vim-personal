@@ -5,6 +5,7 @@
   tasks:
     - name: detect local user
       local_action: command whoami
+      changed_when: false
       register: host_user
 
     - name: set local user fact
