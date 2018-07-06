@@ -6,7 +6,6 @@
     path: "/home/{{ vim_user }}/{{ item }}"
     owner: "{{ vim_user }}"
     group: "{{ vim_user }}"
-    mode: 0700
   with_items:
     - .local/share/nvim/site/autoload
     - .local/share/nvim/plugged
@@ -31,3 +30,10 @@
   become: true
   become_user: "{{ vim_user }}"
   when: (url_plugins is changed) or (nvim_config is changed)
+
+- name: install vim-go patch
+  patch:
+    src: patches/vim-go-complete.patch
+    dest: "/home/{{ vim_user }}/.local/share/nvim/plugged/vim-go/autoload/go/complete.vim"
+  become: true
+  become_user: "{{ vim_user }}"

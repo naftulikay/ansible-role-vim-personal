@@ -1,6 +1,6 @@
 ---
 - name: create nvim config dir
-  file: path=/home/{{ vim_user }}/.config/{{ item }} state=directory owner={{ vim_user }} group={{ vim_user }} mode=0700
+  file: path=/home/{{ vim_user }}/.config/{{ item }} state=directory owner={{ vim_user }} group={{ vim_user }}
   with_items:
     - nvim
     - nvim/config
