@@ -14,6 +14,10 @@
   package: name=git state=present
   become: true
 
+- name: install patch command
+  package: name=patch state=present
+  become: true
+
 - name: install url plugins
   get_url:
     url: "{{ item.url }}"
