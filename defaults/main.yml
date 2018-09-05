@@ -22,12 +22,16 @@ vim_plugs:
   - name: vim-airline/vim-airline-themes
   - name: w0rp/ale
 
+  # golang
   - name: fatih/vim-go
     extra: "{ 'do': ':GoUpdateBinaries' }"
   - name: mdempsky/gocode
     extra: "{ 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }"
   - name: zchee/deoplete-go
     extra: "{ 'do': 'make' }"
+
+  # rust
+  - name: 'rust-lang/rust.vim'
 
 neovim_url_plugins:
   - name: plug
