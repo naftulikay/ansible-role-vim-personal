@@ -1,4 +1,0 @@
-" deoplete-go configuration
-" -----------------------------------------------------------------------------
-
-let deoplete#sources#go#source_importer = 1
