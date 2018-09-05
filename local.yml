@@ -16,4 +16,8 @@
   connection: local
   roles:
     - role: vim-personal
+      node_user: "{{ local_user }}"
+      node_version: 8.11.4
+      addtl_node_user_packages:
+        - neovim
       vim_user: "{{ local_user }}"
