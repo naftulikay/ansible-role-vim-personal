@@ -25,7 +25,7 @@ vim_plugs:
   # golang
   - name: fatih/vim-go
     extra: "{ 'do': ':GoUpdateBinaries' }"
-  - name: mdempsky/gocode
+  - name: nsf/gocode
     extra: "{ 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }"
   - name: zchee/deoplete-go
     extra: "{ 'do': 'make' }"
