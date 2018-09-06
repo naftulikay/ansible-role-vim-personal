@@ -41,3 +41,4 @@
     dest: "/home/{{ vim_user }}/.local/share/nvim/plugged/vim-go/autoload/go/complete.vim"
   become: true
   become_user: "{{ vim_user }}"
+  when: go_patch_source_importer | default(false)
