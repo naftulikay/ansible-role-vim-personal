@@ -3,3 +3,4 @@
   src: naftulikay.vagrant-docker
 
 - src: naftulikay.base
+- src: naftulikay.node-dev

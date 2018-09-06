@@ -2,3 +2,4 @@
 - name: degoss
   src: naftulikay.degoss
 - src: naftulikay.base
+- src: naftulikay.node-dev

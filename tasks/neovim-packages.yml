@@ -14,6 +14,10 @@
   package: name=git state=present
   become: true
 
+- name: install patch command
+  package: name=patch state=present
+  become: true
+
 - name: install url plugins
   get_url:
     url: "{{ item.url }}"
@@ -30,3 +34,11 @@
   become: true
   become_user: "{{ vim_user }}"
   when: (url_plugins is changed) or (nvim_config is changed)
+
+- name: install vim-go patch
+  patch:
+    src: patches/vim-go-complete.patch
+    dest: "/home/{{ vim_user }}/.local/share/nvim/plugged/vim-go/autoload/go/complete.vim"
+  become: true
+  become_user: "{{ vim_user }}"
+  when: go_patch_source_importer | default(false)

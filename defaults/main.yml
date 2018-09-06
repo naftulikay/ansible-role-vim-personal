@@ -30,6 +30,12 @@ vim_plugs:
   - name: zchee/deoplete-go
     extra: "{ 'do': 'make' }"
 
+    # node
+  - name: pangloss/vim-javascript
+  - name: mhartington/nvim-typescript
+    extra: "{ 'for': ['typescript', 'tsx'], 'do': ':UpdateRemotePlugins' }"
+  - name: leafgarland/typescript-vim
+
   # rust
   - name: 'rust-lang/rust.vim'
 

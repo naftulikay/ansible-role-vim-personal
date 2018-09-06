@@ -25,5 +25,5 @@ test: start
 apply:
 	@mkdir -p target/ .ansible/galaxy-roles
 	@rsync --delete --exclude=.ansible/galaxy-roles -a ./ .ansible/galaxy-roles/vim-personal/
-	@ansible-galaxy install -p .ansible/galaxy-roles -r requirements.yml
+	@ansible-galaxy install --force -p .ansible/galaxy-roles -r requirements.yml
 	@ansible-playbook -i localhost, --ask-become-pass local.yml

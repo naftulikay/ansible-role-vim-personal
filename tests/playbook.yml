@@ -11,7 +11,10 @@
   hosts: localhost
   roles:
     - role: default
+      node_user: vagrant
       vim_user: vagrant
+      addtl_node_user_packages:
+        - neovim
 
 - name: test
   hosts: localhost
