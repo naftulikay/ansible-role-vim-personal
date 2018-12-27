@@ -7,6 +7,7 @@ vim_plugs:
   - name: altercation/vim-colors-solarized
   - name: autozimu/LanguageClient-neovim
     extra: "{ 'branch': 'next', 'do': 'bash install.sh' }"
+  - name: cespare/vim-toml
   - name: hashivim/vim-terraform
   - name: juliosueiras/vim-terraform-completion
   - name: junegunn/fzf
