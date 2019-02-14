@@ -16,3 +16,15 @@ file:
     exists: true
     filetype: symlink
     linked-to: /usr/bin/nvim
+
+  '/home/vim/.local':
+    exists: true
+    filetype: directory
+    owner: "{{ .Vars.vim_user }}"
+    group: "{{ .Vars.vim_user }}"
+
+  '/home/vim/.local/bin/fzf':
+    exists: true
+    filetype: symlink
+    owner: "{{ .Vars.vim_user }}"
+    group: "{{ .Vars.vim_user }}"

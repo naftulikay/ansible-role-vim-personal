@@ -1,0 +1,6 @@
+---
+command:
+{{ if .Vars.is_ubuntu_xenial_derivative }}
+  'pip show neovim':
+    exit-status: 0
+{{ end }}

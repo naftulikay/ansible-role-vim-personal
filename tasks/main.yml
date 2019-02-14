@@ -1,15 +1,53 @@
 ---
-- name: install fzf
-  include_tasks: fzf.yml
+- name: detect vim user info
+  command: getent passwd {{ vim_user }}
+  changed_when: false
+  register: vim_user_info_result
+  become: true
 
-- name: install neovim
-  include_tasks: neovim.yml
+- name: set vim user facts
+  set_fact:
+    vim_user_home: "{{ (vim_user_info_result.stdout_lines | first).split(':')[5] }}"
 
-- name: install neovim config
-  include_tasks: neovim-config.yml
+- name: set vim user directory facts
+  set_fact:
+    vim_user_local_bin: "{{ vim_user_home }}/.local/bin"
+    vim_user_local_share: "{{ vim_user_home }}/.local/share"
 
-- name: install neovim python
-  include_tasks: neovim-python.yml
+# NOTE this fixes a weird warning that ansible emits
+- name: create ansible tmp dir
+  file:
+    path: "{{ vim_user_home }}/.ansible/tmp"
+    state: directory
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    recurse: true
+  become: true
+  become_user: "{{ vim_user }}"
 
-- name: install neovim packages
-  include_tasks: neovim-packages.yml
+# we'll be doing a lot of this anyways so better do it here
+- name: create local install directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0700
+  with_items:
+    - "{{ vim_user_home }}/.local"
+    - "{{ vim_user_local_bin }}"
+    - "{{ vim_user_local_share }}"
+  become: true
+  become_user: "{{ vim_user }}"
+
+- include_tasks: "{{ taskset }}"
+  loop:
+    # install, configure, then install plugins
+    - includes/neovim/install.yml
+    - includes/neovim/python.yml
+    - includes/neovim/config.yml
+    - includes/neovim/plugins.yml
+    # install fuzzy finder
+    - includes/fzf.yml
+  loop_control:
+    loop_var: taskset

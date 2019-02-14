@@ -1,25 +1,26 @@
 ---
 - name: setup
-  hosts: localhost
-  vars:
-    container_user: vagrant
+  hosts: all
   tasks:
     - name: create user
-      user: name={{ container_user }} comment="Container User" state=present
+      user: name=vim comment="Container User" state=present
+      become: true
 
 - name: build
-  hosts: localhost
+  hosts: all
   roles:
     - role: default
-      vim_user: vagrant
+      vim_user: vim
 
 - name: test
-  hosts: localhost
-  vars: {}
+  hosts: all
   roles:
-    - role: degoss
-      degoss_clean: false
-      degoss_debug: true
+    - role: naftulikay.degoss
       goss_file: goss.yml
       goss_addtl_dirs: [goss.d]
-      goss_env_vars: {}
+      goss_variables:
+        is_ubuntu_bionic_derivative: "{{ is_ubuntu_bionic_derivative }}"
+        is_ubuntu_xenial_derivative: "{{ is_ubuntu_xenial_derivative }}"
+        vim_user: vim
+      become: true
+      become_user: vim

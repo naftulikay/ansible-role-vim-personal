@@ -1,12 +1,24 @@
 ---
-fzf_github_repo_url: https://github.com/junegunn/fzf-bin
-fzf_version_matcher: ^https://github\.com/junegunn/fzf-bin/releases/tag/(?P<release>\d+\.\d+\.\d+)$
-fzf_version_replace: \g<release>
+fzf_github_owner: junegunn
+fzf_github_repo: fzf-bin
+
+github_access_token: null
+
+include_rust_dev: false
+
+neovim_url_plugins:
+  - name: plug
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# when including rust-dev, use the vim_user as the rust_user
+rust_user: "{{ vim_user }}"
 
 vim_plugs:
   - name: altercation/vim-colors-solarized
   - name: autozimu/LanguageClient-neovim
     extra: "{ 'branch': 'next', 'do': 'bash install.sh' }"
+  - name: cespare/vim-toml
+  - name: elzr/vim-json
   - name: hashivim/vim-terraform
   - name: juliosueiras/vim-terraform-completion
   - name: junegunn/fzf
@@ -20,6 +32,7 @@ vim_plugs:
   - name: tpope/vim-eunuch
   - name: vim-airline/vim-airline
   - name: vim-airline/vim-airline-themes
+  - name: vim-syntastic/syntastic
   - name: w0rp/ale
 
   # golang
@@ -32,7 +45,3 @@ vim_plugs:
 
   # rust
   - name: 'rust-lang/rust.vim'
-
-neovim_url_plugins:
-  - name: plug
-    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

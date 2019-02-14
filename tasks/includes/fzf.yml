@@ -1,0 +1,65 @@
+---
+- name: fetch fzf release information
+  uri:
+    url: "https://api.github.com/repos/{{ fzf_github_owner }}/{{ fzf_github_repo }}/releases/latest"
+    method: GET
+    return_content: true
+    body_format: json
+    headers:
+      'Accept': "application/vnd.github.v3+json"
+      # if github_access_token is defined, use it to prevent rate-limiting
+      'Authorization': "{% if github_access_token %}token {{ github_access_token }}{% endif %}"
+    follow_redirects: safe
+  register: fzf_latest_release_result
+
+- name: establish latest release
+  set_fact:
+    fzf_latest_release: "{{ fzf_latest_release_result.json.name }}"
+    fzf_repo_url: "https://github.com/{{ fzf_github_owner }}/{{ fzf_github_repo}}"
+
+- name: set local fzf facts
+  set_fact:
+    vim_user_fzf_vendor_dir:     "{{ vim_user_home }}/.local/share/fzf"
+    vim_user_fzf_release_dir:    "{{ vim_user_home }}/.local/share/fzf/{{ fzf_latest_release }}"
+    vim_user_fzf_release_binary: "{{ vim_user_home }}/.local/share/fzf/{{ fzf_latest_release }}/fzf"
+
+- name: create local install directories
+  file:
+    path: "{{ vim_user_fzf_vendor_dir }}/{{ fzf_latest_release }}"
+    state: directory
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0700
+  with_items:
+    - "{{ vim_user_fzf_vendor_dir }}"
+    - "{{ vim_user_fzf_release_dir }}"
+  become: true
+  become_user: "{{ vim_user }}"
+
+- name: install fzf
+  unarchive:
+    src: "{{ fzf_repo_url }}/releases/download/{{ fzf_latest_release }}/fzf-{{ fzf_latest_release }}-{{ ansible_system | lower }}_amd64.tgz"
+    dest: "{{ vim_user_fzf_vendor_dir }}/{{ fzf_latest_release }}"
+    creates: "{{ vim_user_fzf_release_binary }}"
+    remote_src: true
+  become: true
+  become_user: "{{ vim_user }}"
+
+- name: modify fzf permissions
+  file:
+    path: "{{ vim_user_fzf_release_binary }}"
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0700
+  become: true
+  become_user: "{{ vim_user }}"
+
+- name: link fzf
+  file:
+    src: "{{ vim_user_fzf_release_binary }}"
+    dest: "{{ vim_user_local_bin }}/fzf"
+    state: link
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+  become: true
+  become_user: vim
