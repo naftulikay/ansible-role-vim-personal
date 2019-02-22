@@ -1,4 +1,5 @@
 " plug: rust-lang/rust.vim
 " -----------------------------------------------------------------------------
 
-let g:rust_clip_command = 'xsel -ib'
+let g:rust_clip_command = 'xclip -i -selection clipboard'
+let g:rustfmt_autosave = 1

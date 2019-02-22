@@ -1,10 +1,16 @@
 ---
 - name: create nvim config dir
-  file: path=/home/{{ vim_user }}/.config/{{ item }} state=directory owner={{ vim_user }} group={{ vim_user }}
+  file:
+    path: "{{ vim_user_home }}/.config/{{ item }}"
+    state: directory
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
   with_items:
     - nvim
     - nvim/config
     - nvim/config/plugs
+  become: true
+  become_user: "{{ vim_user }}"
 
 - name: ensure rsync installed
   package: name=rsync state=present
@@ -13,19 +19,25 @@
 - name: install additional nvim config files
   synchronize:
     src: config/
-    dest: "/home/{{ vim_user }}/.config/nvim/config/"
+    dest: "{{ vim_user_home }}/.config/nvim/config/"
     recursive: true
     delete: true
+  become: true
+  become_user: "{{ vim_user }}"
 
 - name: find config files
-  command: find /home/{{ vim_user }}/.config/nvim/config -mindepth 1 -maxdepth 1 -type f ( -iname '*.vim' -or -iname '*.nvim' ) -printf '%P\n'
+  command: find {{ vim_user_home }}/.config/nvim/config -mindepth 1 -maxdepth 1 -type f ( -iname '*.vim' -or -iname '*.nvim' ) -printf '%P\n'
   changed_when: false
   register: find_config_files
+  become: true
+  become_user: "{{ vim_user }}"
 
 - name: find plug config files
-  command: find /home/{{ vim_user }}/.config/nvim/config/plugs -mindepth 1 -maxdepth 1 -type f -iname '*.nvim' -printf '%P\n'
+  command: find {{ vim_user_home }}/.config/nvim/config/plugs -mindepth 1 -maxdepth 1 -type f -iname '*.nvim' -printf '%P\n'
   changed_when: false
   register: find_plug_config_files
+  become: true
+  become_user: "{{ vim_user }}"
 
 - name: establish config facts
   set_fact:
@@ -35,7 +47,7 @@
 - name: install nvim config files
   template:
     src: "{{ item.src }}"
-    dest: "/home/{{ vim_user }}/.config/nvim/{{ item.dest }}"
+    dest: "{{ vim_user_home }}/.config/nvim/{{ item.dest }}"
     owner: "{{ vim_user }}"
     group: "{{ vim_user }}"
     mode: 0600
@@ -43,3 +55,5 @@
   with_items:
     - { src: init.vim.j2, dest: init.vim }
     - { src: plugs.nvim.j2, dest: plugs.nvim }
+  become: true
+  become_user: "{{ vim_user }}"

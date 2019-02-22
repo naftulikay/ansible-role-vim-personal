@@ -2,13 +2,18 @@
 - name: create plugins directories
   file:
     state: directory
-    recurse: true
     path: "/home/{{ vim_user }}/{{ item }}"
     owner: "{{ vim_user }}"
     group: "{{ vim_user }}"
+    mode: 0700
   with_items:
+    - .local/share/nvim
+    - .local/share/nvim/site
     - .local/share/nvim/site/autoload
     - .local/share/nvim/plugged
+  register: vim_plugins_brand_new
+  become: true
+  become_user: "{{ vim_user }}"
 
 - name: ensure git installed
   package: name=git state=present
@@ -21,12 +26,22 @@
     dest: "/home/{{ vim_user }}/.local/share/nvim/site/autoload/{{ item.name }}.vim"
     owner: "{{ vim_user }}"
     group: "{{ vim_user }}"
-    mode: 0600
+    mode: 0700
   with_items: "{{ neovim_url_plugins }}"
   register: url_plugins
+  become: true
+  become_user: "{{ vim_user }}"
 
 - name: install plugs
   command: vim "+PlugInstall" "+q" "+q"
+  # we only run :PlugInstall on first installation
+  when: vim_plugins_brand_new is changed
   become: true
   become_user: "{{ vim_user }}"
-  when: (url_plugins is changed) or (nvim_config is changed)
+
+- name: update plugs
+  command: vim "+PlugUpdate" "+q" "+q"
+  # run :PlugUpdate only when not new and something has changed
+  when: (vim_plugins_brand_new is not changed) and ((url_plugins is changed) or (nvim_config is changed))
+  become: true
+  become_user: "{{ vim_user }}"

@@ -2,3 +2,8 @@
 package:
   'neovim':
     installed: true
+
+{{ if .Vars.is_ubuntu_bionic_derivative }}
+  'python-neovim':
+    installed: true
+{{ end }}
