@@ -13,7 +13,7 @@ galaxy_info:
     - name: Ubuntu
       versions: [bionic, xenial]
 
-  galaxy_tags: [vim,neovim]
+  galaxy_tags: [vim, neovim]
 
 dependencies:
   - role: naftulikay.base
