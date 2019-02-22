@@ -30,6 +30,7 @@ vim_plugs:
   - name: Shougo/deoplete.nvim
     extra: "{ 'do': ':UpdateRemotePlugins' }"
   - name: tpope/vim-eunuch
+  - name: tpope/vim-surround
   - name: vim-airline/vim-airline
   - name: vim-airline/vim-airline-themes
   - name: vim-syntastic/syntastic
