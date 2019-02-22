@@ -38,7 +38,3 @@
     - { name: vim, link: /usr/bin/vim }
     - { name: editor, link: /usr/bin/editor }
   become: true
-
-- name: install json linter
-  package: name=jsonlint state=present
-  become: true
