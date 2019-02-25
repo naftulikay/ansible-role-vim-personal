@@ -62,4 +62,4 @@
     owner: "{{ vim_user }}"
     group: "{{ vim_user }}"
   become: true
-  become_user: vim
+  become_user: "{{ vim_user }}"
