@@ -4,13 +4,13 @@
     id: 9DBB0BE9366964F134855E2255F96FCF8231B6DD
     keyring: /etc/apt/trusted.gpg.d/neovim.gpg
     keyserver: >-
-      {%- if is_ubuntu_bionic_derivative -%}
+      {%- if is_ubuntu_bionic_derivative | bool -%}
         hkps://hkps.pool.sks-keyservers.net
       {%- else -%}
         keyserver.ubuntu.com
       {%- endif -%}
     state: present
-  when: is_ubuntu_derivative
+  when: is_ubuntu_derivative | bool
   become: true
 
 - name: install ubuntu neovim repository
@@ -18,7 +18,7 @@
     repo: deb http://ppa.launchpad.net/neovim-ppa/stable/ubuntu {{ ubuntu_release }} main
     filename: neovim
     update_cache: true
-  when: is_ubuntu_derivative
+  when: is_ubuntu_derivative | bool
   register: ubuntu_repository
   become: true
 

@@ -18,4 +18,4 @@ galaxy_info:
 dependencies:
   - role: naftulikay.base
   - role: naftulikay.rust-dev
-    when: include_rust_dev
+    when: include_rust_dev | bool

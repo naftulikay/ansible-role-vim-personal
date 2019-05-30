@@ -18,13 +18,24 @@ RUN useradd -s $(which bash) -m -G adm,sudo naftuli && \
   install -d -o naftuli -g naftuli -m 0755 /home/naftuli/devel
 
 RUN mkdir -p /tmp/ansible/roles/vim-personal
-COPY build/* /tmp/ansible/
+COPY build/ansible.cfg build/install-build-deps.yml build/requirements.yml /tmp/ansible/
 
 # galaxy roles
 RUN cd /tmp/ansible && ansible-galaxy install -f -p .ansible/galaxy-roles -r requirements.yml
 
-# install rust
-RUN cd /tmp/ansible &&  ansible-playbook -i 127.0.0.1, -c local install-rust.yml
+# install build dependencies (programming languages, etc.)
+RUN cd /tmp/ansible && ansible-playbook -i 127.0.0.1, -c local install-build-deps.yml
+
+# install and configure the vim role
+COPY defaults /tmp/ansible/roles/vim-personal/defaults
+COPY files /tmp/ansible/roles/vim-personal/files
+COPY meta /tmp/ansible/roles/vim-personal/meta
+COPY tasks /tmp/ansible/roles/vim-personal/tasks
+COPY templates /tmp/ansible/roles/vim-personal/templates
+
+COPY build/vim-personal.yml /tmp/ansible/
+
+RUN cd /tmp/ansible && ansible-playbook -i 127.0.0.1, -c local vim-personal.yml
 
 VOLUME ["/home/naftuli/devel"]
 
