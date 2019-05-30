@@ -3,5 +3,7 @@
   hosts: all
   roles:
     - role: vagrant-docker
+      become: true
     - role: vagrant-python-dev
       python_version: 3.6.8
+      become: true
