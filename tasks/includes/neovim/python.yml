@@ -1,13 +1,13 @@
 ---
 - name: refresh apt cache
   apt: update_cache=yes cache_valid_time=3600
-  when: is_ubuntu_derivative
+  when: is_ubuntu_derivative | bool
   become: true
 
 # anything bionic or later can just install the package
 - name: install neovim python extensions
   package: name=python-neovim state=present
-  when: is_ubuntu_bionic_derivative
+  when: is_ubuntu_bionic_derivative | bool
   become: true
 
 # earlier than bionic, we need a python suite and pip
@@ -18,10 +18,10 @@
     - python-pip
     - python3-dev
     - python3-pip
-  when: is_ubuntu_xenial_derivative
+  when: is_ubuntu_xenial_derivative | bool
   become: true
 
 - name: install neovim python via pip
   pip: name=neovim state=present
-  when: is_ubuntu_xenial_derivative
+  when: is_ubuntu_xenial_derivative | bool
   become: true

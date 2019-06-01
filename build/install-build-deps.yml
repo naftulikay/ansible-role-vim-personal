@@ -1,0 +1,17 @@
+---
+- name: install build dependencies
+  hosts: all
+  connection: local
+  roles:
+    - role: naftulikay.go-dev
+      go_user: naftuli
+      go_version: 1.12.5
+    - role: naftulikay.rust-dev
+      rust_user: naftuli
+  tasks:
+    - name: install musl toolchain
+      command: rustup target add --toolchain stable x86_64-unknown-linux-musl
+      environment:
+        PATH: /home/naftuli/.cargo/bin:/home/naftuli/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      become: true
+      become_user: naftuli

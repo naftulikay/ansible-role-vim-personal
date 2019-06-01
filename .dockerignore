@@ -1,0 +1,13 @@
+/tests
+
+/ansible.cfg
+/docker-compose.yml
+/LICENSE-APACHE
+/LICENSE-MIT
+/local.yml
+/Makefile
+/README.md
+/requirements.txt
+/requirements.yml
+/vagrant.yml
+/Vagrantfile

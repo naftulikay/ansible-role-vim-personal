@@ -1,0 +1,7 @@
+---
+- name: install and configure neovim
+  hosts: all
+  roles:
+    - name: vim-personal
+      vim_user: naftuli
+      include_rust_dev: true
